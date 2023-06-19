@@ -13,7 +13,6 @@ import java.sql.SQLException;
 
 public class JdbcUpdateError {
 	//MySOLと接続する
-	/*jdbc:mysql://ホスト名:ポート番号/データベース名?user=ユーザー名&password=パスワード&useSSL=false&allowPublicKeyRetrieval=true  */
 	private static final String URL = "jdbc:mysql://localhost:3306/database01?user=user01&"
 			+ "password=password01&useSSL=false&allowPublicKeyRetrieval=true";
 	
@@ -23,8 +22,7 @@ public class JdbcUpdateError {
 		Connection connection = null;
 		
 		//トランザクション処理のため、try-catch構文を作る
-		// try(){}ではなく、引数を使わないtry{}を使用する
-		try {
+			try {
 			//コネクションの取得
 			connection = DriverManager.getConnection(URL);
 			PreparedStatement user = connection.prepareStatement("update user set money=? Where id=?");
@@ -32,14 +30,14 @@ public class JdbcUpdateError {
 				//①自動コミットさせない設定にする
 				connection.setAutoCommit(false);
 				
-				//ユーザーAのお金を1,000円減らすSQLを発行する→PreparedStatement
+				//ユーザーAのお金を1,000円減らすSQLを発行する
 				//1番目＝金額、2番目＝id番号指定
 					user.setLong(1, 9000L);
 					user.setLong(2,11L);
 					
 					int count = user.executeUpdate();
 				
-				//ユーザーBのお金を1,000円増やすSQLを発行する→PreparedStatement
+				//ユーザーBのお金を1,000円増やすSQLを発行する
 					//わざとエラー発生させる（；記載ミス）
 					user.setLong(1, 11000L)
 					user.setLong(2,12L);

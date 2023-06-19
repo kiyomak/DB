@@ -29,7 +29,6 @@ public class JdbcInsertMoney {
 				//②ユーザーA、ユーザーBを登録する。残高は10000
 				statement.setString(1, "");	
 				statement.setString(2, "ユーザーA"); //user(name　⇐１番目の登録
-				//statement.setInt(3, 10000); //user(…, monery)の方
 				statement.setLong(3, 10000L);
 				
 				int count = statement.executeUpdate();
